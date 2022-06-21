@@ -7,7 +7,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
-        <title>We_Fashion</title>
+        <title>We_Fashion [Imported]</title>
         
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>

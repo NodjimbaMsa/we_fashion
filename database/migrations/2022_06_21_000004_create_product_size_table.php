@@ -13,19 +13,8 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('product_size', function (Blueprint $table) {
-            $table
-                ->foreignId('size_id')
-                ->references('id')
-                ->on('sizes')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
-
-            $table
-                ->foreignId('product_id')
-                ->references('id')
-                ->on('products')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
+            $table->unsignedBigInteger('size_id');
+            $table->unsignedBigInteger('product_id');
         });
     }
 

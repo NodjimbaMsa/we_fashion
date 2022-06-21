@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::table('pictures', function (Blueprint $table) {
             $table
-                ->foreignId('product_id')
+                ->foreign('product_id')
                 ->references('id')
                 ->on('products')
                 ->onUpdate('CASCADE')

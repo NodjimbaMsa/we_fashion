@@ -2,7 +2,7 @@
     <div class="container">
         
         <a class="navbar-brand text-primary font-weight-bold text-uppercase" href="{{ url('/') }}">
-            We_Fashion
+            We_Fashion [Imported]
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
