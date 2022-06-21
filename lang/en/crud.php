@@ -21,4 +21,16 @@ return [
         'saved' => 'Saved successfully',
         'removed' => 'Successfully removed',
     ],
+
+    'categories' => [
+        'name' => 'Categories',
+        'index_title' => 'Categories List',
+        'new_title' => 'New Category',
+        'create_title' => 'Create Category',
+        'edit_title' => 'Edit Category',
+        'show_title' => 'Show Category',
+        'inputs' => [
+            'name' => 'Name',
+        ],
+    ],
 ];

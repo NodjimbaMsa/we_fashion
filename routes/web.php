@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('/')
+Route::prefix('/admin/category')
     ->middleware('auth')
-    ->group(function () {});
+    ->group(function () {
+        Route::resource('categories', CategoryController::class);
+    });

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
 use App\Models\Scopes\Searchable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -13,6 +14,7 @@ class User extends Authenticatable
     use Notifiable;
     use HasFactory;
     use Searchable;
+    use HasApiTokens;
 
     protected $fillable = ['name', 'email', 'password'];
 

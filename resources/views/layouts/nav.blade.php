@@ -22,6 +22,9 @@
                         </a>
                         
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @can('view-any', App\Models\Category::class)
+                            <a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a>
+                            @endcan
                         </div>
 
                     </li>
