@@ -11,7 +11,7 @@ class Size extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = [];
+    protected $fillable = ['name'];
 
     protected $searchableFields = ['*'];
 

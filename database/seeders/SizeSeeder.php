@@ -14,8 +14,9 @@ class SizeSeeder extends Seeder
      */
     public function run()
     {
-        Size::factory()
-            ->count(5)
-            ->create();
+        Size::create(['name' => 'XS']);
+        Size::create(['name' => 'S']);
+        Size::create(['name' => 'L']);
+        Size::create(['name' => 'XL']);
     }
 }

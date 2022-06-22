@@ -22,6 +22,8 @@ class SizeFactory extends Factory
      */
     public function definition()
     {
-        return [];
+        return [
+            'name' => $this->faker->name,
+        ];
     }
 }
