@@ -19,22 +19,26 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $files = Storage::disk('public')->allFiles('images/');
-        foreach($files as $path){
-            echo $path . PHP_EOL;
-        }
+        $files_men = Storage::disk('public')->allFiles('images/hommes');
+        $files_women = Storage::disk('public')->allFiles('images/femmes');
 
-        $nb_category = Category::all()->count();
         $nb_sizes = Size::all()->count();
 
         $ids = range(1, $nb_sizes);
 
-        Product::factory(80)->create()->each(function ($product) use ($ids, $nb_category, $nb_sizes) {
-			shuffle($ids);
-			$product->size()->attach(array_slice($ids, 0, rand(1, $nb_sizes)));
+        Product::factory(80)->create()->each(function ($product) use ($ids, $nb_sizes, $files_men, $files_women) {
 
-			$category = Category::find(rand(1, $nb_category));
-			$product->category()->associate($category);
+			shuffle($ids);
+            shuffle($files_men);
+            shuffle($files_women);
+
+
+			$product->sizes()->attach(array_slice($ids, 1, rand(1, $nb_sizes)));
+
+            $product->picture()->create([
+				'product_id' => $product->id,
+                'path' => ($product->category->name == 'Homme') ? $files_men[0] : $files_women[0],
+			]);
 
 			$product->save();
 

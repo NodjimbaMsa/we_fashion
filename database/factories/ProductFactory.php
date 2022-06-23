@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -29,6 +30,7 @@ class ProductFactory extends Factory
             'discount' => $this->faker->randomElement(['solde','defaut']),
             'pushished' => $this->faker->boolean,
             'reference' => $this->faker->text(255),
+            'category_id' => $this->faker->randomElement(Category::all()),
         ];
     }
 }
