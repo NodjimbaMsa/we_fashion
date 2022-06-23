@@ -26,10 +26,9 @@ class ProductFactory extends Factory
             'name' => $this->faker->name,
             'description' => $this->faker->sentence(15),
             'price' => $this->faker->randomFloat(2, 0, 9999),
-            'discount' => 'solde',
+            'discount' => $this->faker->randomElement(['solde','defaut']),
             'pushished' => $this->faker->boolean,
             'reference' => $this->faker->text(255),
-            'category_id' => \App\Models\Category::factory(),
         ];
     }
 }

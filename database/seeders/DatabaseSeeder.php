@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Size;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -21,17 +23,12 @@ class DatabaseSeeder extends Seeder
     {
         echo 'Records processed'. PHP_EOL;
 
-
-
-        $files = Storage::disk('public')->allFiles('images/');
-        echo $files[0] . PHP_EOL;
         // $fileNames = array_map(function($file){
         //     return basename($file);
         // }, $files);
-        // $this->call(CategorySeeder::class);
-        // $this->call(PictureSeeder::class);
-        // $this->call(ProductSeeder::class);
-        // $this->call(SizeSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(SizeSeeder::class);
+        $this->call(ProductSeeder::class);
         // $this->call(UserSeeder::class);
     }
 }
