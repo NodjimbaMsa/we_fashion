@@ -1,10 +1,6 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,28 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('/')
-    ->middleware('auth')
-    ->group(function () {});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-/*
-Route::resource('admin/books', BookAdminController::class)->middleware('auth')->parameters([
-	'admin/books' => 'book',
-])/*->names([
-	'show' => 'admin.books.show',
-])*/
-
-Route::resource('admin/product', ProductController::class)->middleware('auth')/*->names([
-	'show' => 'admin.books.show',
-])*/;
-
-
-Route::resource('admin/category', CategoryController::class)->middleware('auth')/*->names([
-	'show' => 'admin.books.show',
-])*/;
-
-
+require __DIR__.'/auth.php';

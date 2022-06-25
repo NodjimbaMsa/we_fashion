@@ -11,7 +11,7 @@ class Picture extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['product_id'];
+    protected $fillable = ['product_id','path'];
 
     protected $searchableFields = ['*'];
 

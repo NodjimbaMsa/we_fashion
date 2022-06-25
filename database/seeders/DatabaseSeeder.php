@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Size;
 use App\Models\User;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -22,13 +23,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         echo 'Records processed'. PHP_EOL;
-
-        // $fileNames = array_map(function($file){
-        //     return basename($file);
-        // }, $files);
+        $this->call(UserSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(SizeSeeder::class);
         $this->call(ProductSeeder::class);
-        // $this->call(UserSeeder::class);
     }
 }
