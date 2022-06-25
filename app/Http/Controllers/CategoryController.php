@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+       $category = Category::paginate(15)
+            ->latest();
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -24,18 +29,24 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CategoryStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $category = Category::create($validated);
+
+        return redirect()
+            ->route('categories.edit')
+            ->withSuccess(__('crud.common.created'));
     }
 
     /**
@@ -46,7 +57,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -57,19 +68,25 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CategoryUpdateRequest  $request
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        //
+        $validated = $request->validated();
+
+        $category->update($validated);
+
+        return redirect()
+            ->route('categories.index')
+            ->withSuccess(__('crud.common.saved'));
     }
 
     /**
@@ -80,6 +97,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()
+            ->route('categories.index')
+            ->withSuccess(__('crud.common.removed'));
     }
 }
