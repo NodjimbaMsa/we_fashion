@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->text('description');
             $table->decimal('price');
             $table->enum('discount', ['solde', 'defaut']);
-            $table->boolean('pushished');
+            $table->enum('visibility', ['published', 'no_published']);
             $table->string('reference');
 
             $table->timestamps();

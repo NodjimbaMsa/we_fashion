@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +18,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::controller(HomeController::class)->group(function() {
+    Route::get('/','homepage')->name('homepage');
+    Route::get('products/{filters}','filterProduct')->name('product.filter')->where('filters', '[A-Za-z]+');
+    Route::get('/product/{id}', 'productDetails')->name('product.detail')->where(['id' => '[0-9]+']);
 });
+
+Route::get('/admin',[LoginController::class, 'showLoginForm'])->name('admin');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('home');
 
 Route::prefix('/dashboard')
     ->middleware(['auth'])
@@ -30,4 +39,19 @@ Route::prefix('/dashboard')
         Route::resource('products', ProductController::class);
     });
 
-require __DIR__.'/auth.php';
+
+// Route::get('/product', function () {
+//     return view('product');
+// });
+
+// Route::controller(BookController::class)->prefix('book')->group(function () {
+// 	Route::get('/', 'index')->name('book.list');
+// 	// Route::get('/{id}', 'show')->name('show.book')->where('id', '[0-9]+');
+// 	Route::get('/{book}', 'show')->name('show.book')->where('book', '[0-9]+');
+// });
+
+// Route::get('/product/{id}', 'show')->name('show.book')->where('id', '[0-9]+');
+
+// Route::get('/products',[HomeController::class, 'homepage'])->name('homepage');
+
+// Route::get('/admin',[LoginController::class, 'showLoginForm'])->name('admin');

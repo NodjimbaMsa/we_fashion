@@ -28,8 +28,8 @@ class ProductFactory extends Factory
             'description' => $this->faker->sentence(15),
             'price' => $this->faker->randomFloat(2, 0, 9999),
             'discount' => $this->faker->randomElement(['solde','defaut']),
-            'pushished' => $this->faker->boolean,
-            'reference' => $this->faker->text(255),
+            'visibility' => $this->faker->randomElement(['published', 'no_published']),
+            'reference' => $this->faker->text(16),
             'category_id' => $this->faker->randomElement(Category::all()),
         ];
     }

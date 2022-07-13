@@ -27,4 +27,11 @@ class CategoryStoreRequest extends FormRequest
             'name' => ['required', 'max:255', 'string'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Le nom de la catégorie est obligatoire'
+        ];
+    }
 }

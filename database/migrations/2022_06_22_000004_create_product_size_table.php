@@ -15,6 +15,9 @@ return new class extends Migration {
         Schema::create('product_size', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('size_id');
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

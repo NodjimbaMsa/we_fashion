@@ -438,53 +438,85 @@
         </nav>
     </header>
 
+    <!-- Section-->
     <section class="py-5 bg-secondary">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
-
-                @forelse ($products as $product )
-                <div class="col mb-5">
-                    <div class="card h-100">
-
-                        <!-- Discount Badge-->
-                        @if($product->discount == 'solde')
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        @endif
-
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{asset($product->picture->path)}}" alt="produit {{$product->name}}" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">{{$product->name}}</h5>
-                                <!-- Product price-->
-                                <span>{{$product->price}}€</span>
+        <div class="card">
+            <div class="row">
+                <aside class="col-sm-5 border-right">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap">
+                            <div>
+                                <img src="{{asset($product->picture->path)}}" class="img-fluid img-thumbnail">
                             </div>
                         </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto stretched-link" href="{{url('product', $product->id)}}">Voir le produit</a></div>
+                    </article>
+                </aside>
+                <aside class="col-sm-7">
+                    <article class="card-body p-5">
+                        <h3 class="title mb-3">{{ $product->name }}</h3>
+
+                        <p class="price-detail-wrap">
+                            <span class="price h3">
+                                <span class="num">1299</span><span class="currency">€</span>
+                            </span>
+                        </p>
+                        <dl class="item-property">
+                            <dt>Description</dt>
+                            <dd>
+                                <p>{{ $product->description }}</p>
+                            </dd>
+                        </dl>
+                        <dl class="param param-feature">
+                            <dt>Reference#</dt>
+                            <dd>{{ $product->reference }}</dd>
+                        </dl>
+                        <dl class="param param-feature">
+                            <dt>Solde</dt>
+                            @if($product->discount == 'solde')
+                            <dd>Produit soldé <div class="badge bg-dark text-white">Sale</div>
+                            </dd>
+                            @else
+                            <dd>Produit standard</dd>
+                            @endif
+                        </dl>
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <dl class="param param-inline">
+                                    <dt>Size: </dt>
+                                    <dd>
+                                        @forelse($product->sizes as $size)
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                            <span class="form-check-label">{{$size->name}}</span>
+                                        </label>
+                                        @empty
+
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                            <span class="form-check-label">Aucune taille disponible</span>
+                                        </label>
+                                        @endforelse($product->sizes as $size)
+                                    </dd>
+                                </dl>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                @empty
-
-                <h1>Aucun Produit <h1>
-
-                @endforelse($products as $product)
-
-            </div>
-            <div class="clearfix">
-                <div class="col-12 mt-4 me-4">
-                    {{ $products->links('pagination::bootstrap-4') }}
-                </div>
+                        <hr>
+                        <a href="#" class="btn btn-lg btn-primary text-uppercase"> Acheter maintenant </a>
+                        <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i>Ajouter au panier </a>
+                    </article>
+                </aside>
             </div>
         </div>
     </section>
 
     <footer class="bg-dark text-center text-lg-start text-white">
+
         <div class="container p-4">
+
             <div class="row mt-4">
+
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase">informations</h5>
 
@@ -537,7 +569,7 @@
 
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
             © 2022 Copyright:
-            <a class="text-white" href="#!">We Fashion</a>
+            <a class="text-white" href="https://mdbootstrap.com/">We Fashion</a>
         </div>
     </footer>
 </body>

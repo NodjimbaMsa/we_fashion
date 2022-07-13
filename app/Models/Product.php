@@ -19,15 +19,11 @@ class Product extends Model
         'description',
         'price',
         'discount',
-        'pushished',
+        'visibility',
         'reference',
     ];
 
     protected $searchableFields = ['*'];
-
-    protected $casts = [
-        'pushished' => 'boolean',
-    ];
 
     public function picture()
     {

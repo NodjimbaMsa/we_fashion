@@ -9,21 +9,32 @@ use App\Http\Requests\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
+    /**
+     * Display a listing of the categories.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-       $category = Category::paginate(15)
-            ->latest();
+        $categories = Category::paginate(15);
 
         return view('admin.categories.index', compact('categories'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new category.
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,7 +44,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category in storage.
      *
      * @param  \Illuminate\Http\CategoryStoreRequest $request
      * @return \Illuminate\Http\Response
@@ -46,22 +57,11 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('categories.edit')
-            ->withSuccess(__('crud.common.created'));
+            ->with('message', 'La catégorie a été crée');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        return view('admin.categories.show', compact('category'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified category.
      *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
@@ -72,7 +72,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified category in storage.
      *
      * @param  \Illuminate\Http\CategoryUpdateRequest  $request
      * @param  \App\Models\Category  $category
@@ -86,11 +86,11 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('categories.index')
-            ->withSuccess(__('crud.common.saved'));
+            ->with('message', 'La catégorie a été modifié');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified category from storage.
      *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
@@ -101,6 +101,6 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('categories.index')
-            ->withSuccess(__('crud.common.removed'));
+            ->with('message', 'La catégorie a été supprimé');
     }
 }

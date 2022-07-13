@@ -1,7 +1,15 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
+window.addEventListener("load", function(event) {
 
-Alpine.start();
+    // Product modal
+    const form = document.getElementById("formDelete");
+    const validateDelete = document.querySelector('.validateDelete');
+
+    if (validateDelete !== null) {
+        validateDelete.addEventListener('click', (e) => {
+            form.submit();
+        })
+    }
+});

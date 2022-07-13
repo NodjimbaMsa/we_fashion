@@ -28,9 +28,26 @@ class ProductUpdateRequest extends FormRequest
             'name' => ['required', 'max:255', 'string'],
             'description' => ['required', 'max:255', 'string'],
             'price' => ['required', 'numeric'],
-            'discount' => ['required', 'in:en_solde,standard'],
-            'published' => ['required', 'boolean'],
+            'discount' => ['required', 'in:solde,defaut'],
+            'visibility' => ['required'],
             'reference' => ['required', 'max:16', 'string'],
+            'picture' => ['image']
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Le nom du produit est obligatoire',
+            'description.required' => 'Une description du produit est obligatoire',
+            'price.required' => 'Le prix du produit est obligatoire',
+            'reference.size' => 'La référence du produit doit faire 16 caractères',
+            'reference.required' => 'La référence du produit est obligatoire',
+            'sizes.required' => "Au moins une taille est obligatoire",
+            "picture.required" => "La photo est obligatoire",
+            "category_id.required" => "La catégorie est obligatoire",
+            "visibility.required" => "Veuillez choisir si l'article doit etre publié ou non"
         ];
     }
 }
